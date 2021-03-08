@@ -22,6 +22,7 @@ make check-tasks
 
 
 # Verify that the number of run_asgi tasks is 11 (it should be 1).
+# {"run_asgi": 11, "main": 1, "serve": 1}
 ```
 
 ### websockets
@@ -39,4 +40,5 @@ make check-tasks
 
 
 # Verify that the number of run_asgi tasks is 1 (as expected).
+# {"keepalive_ping": 1, "close_connection": 1, "transfer_data": 1, "run_asgi": 1, "handler": 1, "main": 1, "serve": 1}
 ```

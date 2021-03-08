@@ -7,6 +7,7 @@ name = "pypi"
 uvicorn = "*"
 websockets = "*"
 wsproto = "*"
+starlette = "*"
 
 [dev-packages]
 

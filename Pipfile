@@ -8,6 +8,7 @@ uvicorn = "*"
 websockets = "*"
 wsproto = "*"
 starlette = "*"
+websocket-client = "*"
 
 [dev-packages]
 

@@ -1,9 +1,14 @@
-PORT=8080
-HOST=0.0.0.0
+.PHONY: websockets wsproto batch-connections check-tasks
 
 
 websockets:
-	pipenv shell uvicorn main:app --reload --host $(HOST) --ws websockets --port $(PORT)
+	pipenv run uvicorn main:app --reload --ws websockets
 
 wsproto:
-	pipenv shell uvicorn main:app --reload --host $(HOST) --ws wsproto --port $(PORT)
+	pipenv run uvicorn main:app --reload --ws wsproto
+
+batch-connections:
+	pipenv run python client.py batch
+
+check-tasks:
+	pipenv run python client.py get-ongoing-tasks

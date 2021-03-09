@@ -5,7 +5,7 @@ Differently than websockets impl, wsproto impl leaves zombie tasks ongoing after
 forget to properly close connections.
 
 ## Running
-Make sure you have pipenv installed.
+Make sure you have pipenv installed. Clone this repo and follow instructions below:
 
 ### wsproto
 ```bash

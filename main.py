@@ -1,5 +1,4 @@
 import asyncio
-import json
 from collections import Counter
 
 import uvicorn
@@ -8,7 +7,7 @@ import uvicorn
 def asgi_tasks():
     tasks = [task._coro.__name__ for task in asyncio.all_tasks()]
     task_counter = Counter(tasks)
-    return str(json.dumps(task_counter))
+    return str(dict(task_counter))
 
 
 async def app(scope, receive, send):

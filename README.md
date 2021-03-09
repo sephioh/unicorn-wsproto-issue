@@ -36,5 +36,5 @@ make batch-connections
 make check-tasks
 
 # Verify that the number of run_asgi tasks is 1 (as expected).
-# {"keepalive_ping": 1, "close_connection": 1, "transfer_data": 1, "run_asgi": 1, "handler": 1, "main": 1, "serve": 1}
+# {'run_asgi': 1, 'handler': 1, 'serve': 1, 'close_connection': 1, 'keepalive_ping': 1, 'transfer_data': 1}
 ```

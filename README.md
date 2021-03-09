@@ -1,4 +1,4 @@
-# unicorn-wsproto-issue
+# uvicorn-wsproto-issue
 This project tries to display the problem with wsproto implementation on
 uvicorn.
 Differently than websockets impl, wsproto impl leaves zombie tasks ongoing after clients

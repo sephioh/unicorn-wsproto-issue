@@ -4,7 +4,7 @@ from collections import Counter
 import uvicorn
 
 
-def asgi_tasks():
+def ongoing_tasks():
     tasks = [task._coro.__name__ for task in asyncio.all_tasks()]
     task_counter = Counter(tasks)
     return str(dict(task_counter))
@@ -26,7 +26,7 @@ async def app(scope, receive, send):
     while True:
         message = await receive()
         if message["type"] == "websocket.receive":
-            await send({"type": "websocket.send", "text": asgi_tasks()})
+            await send({"type": "websocket.send", "text": ongoing_tasks()})
 
         if message["type"] == "websocket.disconnect":
             break

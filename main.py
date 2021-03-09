@@ -3,9 +3,6 @@ import json
 from collections import Counter
 
 import uvicorn
-from starlette.applications import Starlette
-from starlette.endpoints import WebSocketEndpoint
-from starlette.routing import WebSocketRoute
 
 
 def asgi_tasks():
@@ -14,22 +11,27 @@ def asgi_tasks():
     return str(json.dumps(task_counter))
 
 
-class MainWebSocket(WebSocketEndpoint):
-    encoding = "text"
+async def app(scope, receive, send):
+    assert scope["type"] == "websocket"
 
-    async def on_connect(self, websocket):
-        await websocket.accept()
+    await send(
+        {
+            "type": "websocket.accept",
+            "status": 200,
+            "headers": [
+                [b"content-type", b"text/plain"],
+            ],
+        }
+    )
 
-    async def on_receive(self, websocket, data):
-        await websocket.send_text(asgi_tasks())
+    while True:
+        message = await receive()
+        if message["type"] == "websocket.receive":
+            await send({"type": "websocket.send", "text": asgi_tasks()})
 
-    async def on_disconnect(self, websocket, close_code):
-        pass
+        if message["type"] == "websocket.disconnect":
+            break
 
-
-routes = [WebSocketRoute("/ws", MainWebSocket)]
-
-app = Starlette(routes=routes)
 
 if __name__ == "__main__":
-    uvicorn.run(app=app, host="localhost", port=8080)
+    uvicorn.run(app=app)

@@ -1,13 +1,11 @@
 .PHONY: websockets wsproto batch-connections check-tasks
-HOST=localhost
-PORT=8080
 
 
 websockets:
-	pipenv run uvicorn main:app --reload --ws websockets --host $(HOST) --port $(PORT)
+	pipenv run uvicorn main:app --ws websockets
 
 wsproto:
-	pipenv run uvicorn main:app --reload --ws wsproto --host $(HOST) --port $(PORT)
+	pipenv run uvicorn main:app --ws wsproto
 
 batch-connections:
 	pipenv run python client.py batch

@@ -8,7 +8,7 @@ CONNECTIONS = 10
 
 def get_ongoing_tasks():
     ws = websocket.WebSocket()
-    ws.connect("ws://localhost:8080/ws")
+    ws.connect("ws://localhost:8000/ws")
     ws.send("")
     result = ws.recv()
     print(result)
@@ -19,7 +19,7 @@ async def multiple_bad_connections():
     """Create multiple connections but do not close them properly."""
     async def connect():
         ws = websocket.WebSocket()
-        ws.connect("ws://localhost:8080/ws")
+        ws.connect("ws://localhost:8000/ws")
 
     tasks = [asyncio.create_task(connect()) for i in range(CONNECTIONS)]
     await asyncio.gather(*tasks)
